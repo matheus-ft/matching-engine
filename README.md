@@ -42,7 +42,7 @@ if a market order could not trade (limit orders that don't trade will always be 
 
 ### Data structures
 
-The `OrderBook` is a structure that points to two binary search trees, each representing one side of the book (`BookSide`). The nodes of the binary search trees are called Price `Level`s, which are, in fact, queues implemented using a doubly linked list.
+The `OrderBook` is a structure that points to two binary search trees, each representing one side of the book (`BookSide`). The nodes of the binary search trees are called Price `Level`s, which are, in fact, queues (implemented using a doubly linked list) of `Order`s.
 
 ---
 
