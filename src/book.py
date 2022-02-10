@@ -38,6 +38,7 @@ class OrderBook:
     reallocate_order(order: Order, origin_level: Level) -> None:
         Reinserts a modified order in the order book.
     """
+
     def __init__(self) -> None:
         """ Constructs a new Order Book """
         self.bid = BookSide(True)
@@ -85,11 +86,7 @@ class OrderBook:
             elif order.is_buy and (order.price < counterparty_level.price):
                 order_side.register_order(order)
                 return
-            elif (
-                not order.is_buy
-                and
-                (order.price > counterparty_level.price)
-            ):
+            elif not order.is_buy and (order.price > counterparty_level.price):
                 order_side.register_order(order)
                 return
             order = self.trade_limit_order(order, counterparty_level)
@@ -150,10 +147,8 @@ class OrderBook:
         if limit_order.price == level.price:
             return self.trade_at_level(limit_order, level)
         counterparty: Order = level.head
-        while (
-            (counterparty.total() == limit_order.total())
-            or
-            (counterparty.qty == limit_order.qty)
+        while (counterparty.total() == limit_order.total()) or (
+            counterparty.qty == limit_order.qty
         ):
             counterparty = counterparty.next
             if counterparty is None:

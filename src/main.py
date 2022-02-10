@@ -10,7 +10,7 @@ def start_trading() -> None:
     """
     book = OrderBook()
     quote: str = input()
-    while (quote != "stop"):
+    while quote != "stop":
         book.add_order(Order(quote))
         quote = input()
 

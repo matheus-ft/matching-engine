@@ -35,6 +35,7 @@ class BookSide:  # bst
         Removes a given level of the BookSide
         by replacing it with its successor
     """
+
     def __init__(self, is_bid: bool) -> None:
         """Constructs a side of an order book
 
@@ -64,9 +65,9 @@ class BookSide:  # bst
         aux: Level = None
         while pointer is not None:
             aux = pointer
-            if (pointer.price > limit_order.price):
+            if pointer.price > limit_order.price:
                 pointer = pointer.left
-            elif (pointer.price < limit_order.price):
+            elif pointer.price < limit_order.price:
                 pointer = pointer.right
             else:
                 break
@@ -97,7 +98,7 @@ class BookSide:  # bst
         level = start if (start is not None) else self.root
         if level is None:
             return None
-        while (level.left is not None):
+        while level.left is not None:
             level = level.left
         return level
 
@@ -114,7 +115,7 @@ class BookSide:  # bst
         level = start if (start is not None) else self.root
         if level is None:
             return None
-        while (level.right is not None):
+        while level.right is not None:
             level = level.right
         return level
 
@@ -149,9 +150,9 @@ class BookSide:  # bst
             new (Level): replacing level
         """
         if old is not None:
-            if (old.parent is None):
+            if old.parent is None:
                 self.root = new
-            elif (old == old.parent.left):
+            elif old == old.parent.left:
                 old.parent.left = new
             else:
                 old.parent.right = new
@@ -166,9 +167,9 @@ class BookSide:  # bst
         Args:
             level (Level): price level to be removed
         """
-        if (level.left is None):
+        if level.left is None:
             self.replace_level(level, level.right)
-        elif (level.right is None):
+        elif level.right is None:
             self.replace_level(level, level.left)
         else:
             next_level = self.next_level(level)

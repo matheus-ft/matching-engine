@@ -19,6 +19,7 @@ class Quote:
         Timestamp of the instant the order was given,
         so that it can be uniquely identified
     """
+
     def __init__(self, quote: str) -> None:
         """Constructs a quote from a expected string sintax
 
@@ -67,6 +68,7 @@ class Order(Quote):  # doubly linked list node
         Timestamp of the instant the order was given,
         so that it can be uniquely identified
     """
+
     def __init__(self, quote: str) -> None:
         """Constructs a new order based on a given quote
 

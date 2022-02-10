@@ -40,6 +40,7 @@ class Level:  # queue capsule and bst node
         removes a specific limit order inside the queue
         identifying it by its timestamp
     """
+
     def __init__(self, limit_order: Order) -> None:
         """Constructs a new price level based on a limit order
 
@@ -101,7 +102,7 @@ class Level:  # queue capsule and bst node
         self.total_qty += limit_order.qty
         pointer: Order = self.head
         aux: Order = None
-        while (pointer.timestamp >= limit_order.timestamp):
+        while pointer.timestamp >= limit_order.timestamp:
             aux = pointer
             pointer = pointer.next
         aux.next = limit_order
@@ -122,7 +123,7 @@ class Level:  # queue capsule and bst node
         self.total_qty -= limit_order.qty
         pointer: Order = self.head
         aux: Order = None
-        while (pointer != limit_order):
+        while pointer != limit_order:
             aux = pointer
             pointer = pointer.next
         aux.next = limit_order.next
