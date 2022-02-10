@@ -134,12 +134,12 @@ class BookSide:  # bst
             return None
         if level.right is not None:
             return self.min_level(level.right)
-        next = level.parent
+        next_level = level.parent
         aux = level
-        while (next is not None) and (aux == next.right):
-            aux = next
-            next = next.parent
-        return next
+        while (next_level is not None) and (aux == next_level.right):
+            aux = next_level
+            next_level = next_level.parent
+        return next_level
 
     def replace_level(self, old: Level, new: Level) -> None:
         """Replaces a given level by another one inside the BST

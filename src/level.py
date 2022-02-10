@@ -96,7 +96,7 @@ class Level:  # queue capsule and bst node
             limit_order (Order): limit order to be added
         """
         if limit_order.timestamp >= self.tail.timestamp:
-            self.enqueue_order()
+            self.enqueue_order(limit_order)
             return
         self.total_qty += limit_order.qty
         pointer: Order = self.head
