@@ -1,9 +1,11 @@
+"""Implements one side of an order book as a binary search tree."""
+
 from quote import Order
 from level import Level
 
 
-class BookSide:  # bst
-    """Class to represent one side of an Order Book
+class BookSide:
+    """Class to represent one side of an Order Book.
 
     Attributes
     ----------
@@ -37,7 +39,7 @@ class BookSide:  # bst
     """
 
     def __init__(self, is_bid: bool) -> None:
-        """Constructs a side of an order book
+        """Build a side of an order book.
 
         Args:
             is_bid (bool)
@@ -47,7 +49,8 @@ class BookSide:  # bst
         self.total_qty: int = 0
 
     def register_order(self, limit_order: Order, timestamp: bool = False):
-        """Properly registers a limit order in the order book.
+        """Properly register a limit order in the order book.
+
         If there's no existing Level for the order, one is created.
         If `timestamp` is not given, the order is enqueued in its Level,
         otherwise, the order will be inserted respecting its timestamp.
@@ -86,7 +89,7 @@ class BookSide:  # bst
         level.parent = aux
 
     def min_level(self, start: Level = None) -> Level:
-        """Finds the level with the lowest price.
+        """Find the level with the lowest price.
 
         Args:
             start (Level, optional): specifies the starting level
@@ -103,7 +106,7 @@ class BookSide:  # bst
         return level
 
     def max_level(self, start: Level = None) -> Level:
-        """Finds the level with the highest price.
+        """Find the level with the highest price.
 
         Args:
             start (Level, optional): specifies the starting level
@@ -120,7 +123,7 @@ class BookSide:  # bst
         return level
 
     def next_level(self, level: Level) -> Level:
-        """Finds the successor of a given price level.
+        """Find the successor of a given price level.
 
         "Successor" being the price level with the lowest price
         thats is greater than `level.price`
@@ -143,7 +146,7 @@ class BookSide:  # bst
         return next_level
 
     def replace_level(self, old: Level, new: Level) -> None:
-        """Replaces a given level by another one inside the BST
+        """Replace a given level by another one inside the BST.
 
         Args:
             old (Level): price level to be replaced
@@ -161,8 +164,7 @@ class BookSide:  # bst
                 new.parent = old.parent
 
     def remove_level(self, level: Level) -> None:
-        """Removes a given level of the BookSide
-        by replacing it with its successor
+        """Delete a given level of the BookSide by replacing it with its successor.
 
         Args:
             level (Level): price level to be removed

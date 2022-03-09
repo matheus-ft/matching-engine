@@ -1,13 +1,11 @@
+"""Runs a trading simulation with the implemented features."""
+
 from quote import Order
 from book import OrderBook
 
 
 def start_trading() -> None:
-    """
-    Runs the matching engine designed in `OrderBook` -
-    receiving orders by inputs at the terminal -
-    and stops running once the quote string is 'stop'
-    """
+    """Run the matching engine designed in `OrderBook` - receiving orders by inputs at the terminal - and stops running once the quote string is 'stop'."""
     book = OrderBook()
     quote: str = input()
     while quote != "stop":

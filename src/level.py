@@ -1,7 +1,9 @@
+"""Implements a price level class that is a (linked list) queue capsule and a BST node."""
+
 from quote import Order
 
 
-class Level:  # queue capsule and bst node
+class Level:
     """
     Class to represent a price level in the OrderBook.
 
@@ -42,7 +44,7 @@ class Level:  # queue capsule and bst node
     """
 
     def __init__(self, limit_order: Order) -> None:
-        """Constructs a new price level based on a limit order
+        """Build a new price level based on a limit order.
 
         Args:
             limit_order (Order)
@@ -60,7 +62,7 @@ class Level:  # queue capsule and bst node
         self.parent: Level = None
 
     def enqueue_order(self, limit_order: Order) -> None:
-        """Adds a new limit order in the end of the queue
+        """Add a new limit order in the end of the queue.
 
         Args:
             limit_order (Order): limit order to be added
@@ -74,7 +76,7 @@ class Level:  # queue capsule and bst node
         self.tail = limit_order
 
     def dequeue_order(self) -> Order:
-        """Removes the limit order in the front of the queue
+        """Remove the limit order in the front of the queue.
 
         Returns:
             Order: the first limit order in queue
@@ -90,8 +92,7 @@ class Level:  # queue capsule and bst node
         return order
 
     def insert_order(self, limit_order: Order) -> None:
-        """Inserts a limit order considering its timestamp
-        relative to the ones already in queue
+        """Insert a limit order considering its timestamp relative to the ones already in queue.
 
         Args:
             limit_order (Order): limit order to be added
@@ -111,8 +112,7 @@ class Level:  # queue capsule and bst node
         limit_order.prev = aux
 
     def remove_order(self, limit_order: Order) -> None:
-        """Removes a specific limit order inside the queue
-        identifying it by its timestamp
+        """Remove a specific limit order inside the queue identifying it by its timestamp.
 
         Args:
             limit_order (Order): limit order to be removed

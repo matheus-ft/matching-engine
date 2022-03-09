@@ -1,8 +1,10 @@
+"""Implements a helper quote class to send orders as doubly-linked list nodes to the exchange."""
+
 from datetime import datetime
 
 
 class Quote:
-    """Helper class to process a quote string
+    """Helper class to process a quote string.
 
     Attributes
     ----------
@@ -21,7 +23,7 @@ class Quote:
     """
 
     def __init__(self, quote: str) -> None:
-        """Constructs a quote from a expected string sintax
+        """Build a quote from a expected string sintax.
 
         Args:
             quote (str)
@@ -34,8 +36,8 @@ class Quote:
         self.timestamp = datetime.now()
 
 
-class Order(Quote):  # doubly linked list node
-    """Class to represent an order
+class Order(Quote):
+    """Class to represent an order.
 
     The data is the same of a Quote,
     with the addition of the references to other orders
@@ -46,15 +48,6 @@ class Order(Quote):  # doubly linked list node
         Points to the next order in queue
     prev : Order
         Points to the previous order in queue
-
-    Methods
-    -------
-    total -> float:
-        Returns the total volume (`.qty * .price`) of the order -
-        if it is of limit type, otherwise, `None`
-
-    Inherited Attributes
-    ----------
     is_limit : bool
         Indicates the type of the order: limit (`True`) or market (`False`)
     is_buy : bool
@@ -67,10 +60,16 @@ class Order(Quote):  # doubly linked list node
     timestamp : datetime
         Timestamp of the instant the order was given,
         so that it can be uniquely identified
+
+    Methods
+    -------
+    total -> float:
+        Returns the total volume (`.qty * .price`) of the order -
+        if it is of limit type, otherwise, `None`
     """
 
     def __init__(self, quote: str) -> None:
-        """Constructs a new order based on a given quote
+        """Build a new order based on a given quote.
 
         Args:
             quote (str): string describing the order
@@ -80,7 +79,7 @@ class Order(Quote):  # doubly linked list node
         self.prev: Order = None
 
     def total(self) -> float:
-        """Gives the volume of the order
+        """Return the volume of the order.
 
         Returns:
             float: qty * price

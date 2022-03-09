@@ -1,10 +1,12 @@
+"""Implements an order book of a simplified exchange as a wrapper for two book sides."""
+
 from quote import Order
 from level import Level
 from side import BookSide
 
 
 class OrderBook:
-    """Class to represent an Order Book
+    """Class to represent an Order Book.
 
     Attributes
     ----------
@@ -40,12 +42,12 @@ class OrderBook:
     """
 
     def __init__(self) -> None:
-        """ Constructs a new Order Book """
+        """Build a new Order Book."""
         self.bid = BookSide(True)
         self.ask = BookSide(False)
 
     def add_order(self, order: Order) -> None:
-        """Adds an order to the order book.
+        """Add an order to the order book.
 
         Args:
             order (Order): order to be booked
@@ -56,7 +58,7 @@ class OrderBook:
             self.process_market_order(order)
 
     def process_limit_order(self, order: Order) -> None:
-        """Adds a limit order to the book.
+        """Insert a limit order to the book.
 
         Args:
             order (Order): limit order being processed
@@ -95,7 +97,7 @@ class OrderBook:
             )
 
     def process_market_order(self, order: Order) -> None:
-        """Finds and executes available trades.
+        """Execute any available trades found.
 
         If there aren't any counterparties, it discards the order.
 
@@ -119,8 +121,7 @@ class OrderBook:
             print("Booking failed: no orders to match")
 
     def trade_limit_order(self, limit_order: Order, level: Level) -> Order:
-        """Finds a proper counterparty and, if one exists,
-        executes the trade and updates the orders.
+        """Execute a trade and update orders if a proper counterparty is found.
 
         Args:
             limit_order (Order): order to be traded
@@ -131,14 +132,11 @@ class OrderBook:
 
         This method is only called if the bid (buy price) is higher than
         the ask (sell price).
-
         If the price of the order has a counterparty level, then
         the limit order can be treated as a market order.
-
         But if that's not the case, then it is only possible to trade
         at different prices if both the total volume and the quantity
         of the orders are different.
-
         In any case, the only order updated is the one with more shares -
         if a buy, the price increases, if a sell, it decreases
         (this way it is closer to the best offer); also the quantity is
@@ -174,8 +172,7 @@ class OrderBook:
         return limit_order
 
     def trade_at_level(self, market_order: Order, level: Level) -> Order:
-        """Matches as many booked orders in the level as possible
-        with the given market order.
+        """Match as many booked orders in the level as possible with the given market order.
 
         Args:
             market_order (Order): order searching for matches
@@ -209,7 +206,7 @@ class OrderBook:
         return market_order
 
     def print_match(self, price: float, qty: int) -> None:
-        """Displays the results of a successful match.
+        """Display the results of a successful match.
 
         Args:
             price (float): price at which the trade was executed
@@ -218,7 +215,7 @@ class OrderBook:
         print(f"Trade, price: {price}, qty: {qty}")
 
     def reallocate_order(self, order: Order, origin_level: Level) -> None:
-        """Reinserts a modified order in the order book.
+        """Reinsert a modified order in the book.
 
         Args:
             order (Order): limit order modified through trading
