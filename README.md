@@ -1,11 +1,12 @@
 # Matching Engine
 
-This project is an exercise to build a simple matching engine that deals one security and receives order by quoting at the terminal.
+This project was an exercise to build a simple matching engine that deals one security and receives order by quoting at the terminal.
 
 ---
 
 ## Sendind Orders and Seeing Trades
 
+To test the program, run `python3 src/main.py` from the project's root.
 The engine expects inputs in the following format:
 
 ```shell
@@ -18,19 +19,21 @@ or
 market <side> <qty>
 ```
 
-(Market orders don't have a specified price, so they trade at the best offer available)
+Note that market orders don't have a specified price, that is because they trade at the best offer available.
 
-And, for simplicity, it is considered that the input is always in the correct format. As if the engine received the order from a button pressed and not an actual string typed by a person who could make a mistake - yes, this is a point where the project could improve, with a good quoting syntax (and NLP, maybe).
+For simplicity, it is assumed that the input is always in the correct format. As if the engine received the order from a button pressed by traders, and not a literal string typed by a person, who could make a mistake - yes, this is a point where the project could improve, with a good quoting syntax (and NLP, for a sexy data science title).
 
-The outputs, however, are only two:
+The outputs, however, are only two
+
+1) if a match is found:
 
 > Trade, price: \<price>, qty: \<qty>
 
-if a match was found, and
+2) if a **market** order has no counterparty available:
 
 > Booking failed: no orders to match
 
-if a market order could not trade (limit orders that don't trade will always be booked/"stored").
+It should be noted that **limit** orders that aren't traded right away will always be stored as "booked"
 
 ---
 
@@ -71,4 +74,10 @@ Important considerations:
 
 ## Why Python?
 
-Since this exercise was done in about a week, I prioritized development speed over execution speed. As I am more familiar with Python than Java and C++, I was able to code faster. But it should not be difficult to translate the program to another language, specially considering that no outside package was used and that it was already *kinda* done from C (see [data-structures](https://github.com/matheus-ft/data-structures) repo).
+Since this exercise had to be done in just under a week, I prioritized development speed over execution speed. As I am more familiar with Python than Java or C++, I was able to code faster. But it should not be difficult to translate the program to another language, specially considering that no outside package was used and that the hard part was already *kinda* done in my [data-structures](https://github.com/matheus-ft/data-structures) repo.
+
+### Notes
+
+Anything commited after 2021/11/03 is not part of the exercise, it is just me tweaking things around because I think
+this project is kinda cool.
+
