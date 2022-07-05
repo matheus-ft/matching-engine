@@ -6,7 +6,7 @@ This project was an exercise to build a simple matching engine that deals one se
 
 ## Sendind Orders and Seeing Trades
 
-To test the program, run `python3 src/main.py` from the project's root.
+To test the program, run `python3 main.py` from the project's root.
 The engine expects inputs in the following format:
 
 ```shell
@@ -47,28 +47,28 @@ The `OrderBook` is a class that has two binary search trees, each representing o
 
 ### Performance
 
-The binary search tree data structure was chosen so that the **average** time complexity for the search of **any** price level would be *O(log(n))* - which includes findind the levels for the **best bid** (the **highest buy** price) and the **best ask** (the **lowest sell** price) for any market order.
-The queue, in turn, was chosen to guarantee that the orders would be matched following **FIFO** and, also, that insertion and remotion in them would be *O(1)*.
+The binary search tree data structure was chosen so that the **average** time complexity for the search of **any** price level would be $O(log(n))$ - which includes findind the levels for the **best bid** (the **highest buy** price) and the **best ask** (the **lowest sell** price) for any market order.
+The queue, in turn, was chosen to guarantee that the orders would be matched following **FIFO** and, also, that insertion and remotion in them would be $O(1)$.
 
 ---
 
 ### Exception to the FIFO policy
 
-The algorithm will only match limit orders that represent "good offers" to each other. That is, if a limit order to buy *n* shares at price *x* arrives, "good offer" is an order to sell *m* shares at price *y* with *x >= y*. The opposite is also true: arriving a sell *n* shares at price *x*, then a good offer is a buy *m* shares at price *y* with *x <= y* (the conditions over *m* and *n* will appear).
+The algorithm will only match limit orders that represent "good offers" to each other. That is, if a limit order to buy $n$ shares at price $x$ arrives, "good offer" is an order to sell $m$ shares at price $y$ with $x \geq y$. The opposite is also true: arriving a sell $n$ shares at price $x$, then a good offer is a buy $m$ shares at price $y$ with $x \leq y$ (the conditions over $m$ and $n$ will appear).
 
-It should be noted, however, that the cases in which *x == y*, the order can be matched in place, which means that their prices will stay the same, only the quantities will change.
+It should be noted, however, that the cases in which $x = y$, the order can be matched in place, which means that their prices will stay the same, only the quantities will change.
 
-If that is not the case, however, the amount of shares and the total volume (quantity times price) of the offers can make the trade impossible. In fact, it is only possible to trade if both of them are different (*m != n* and *ym != xn*), so that the one with less volume can be updated to a better price and lower quantity (with both equal, there's no room for change).
+If that is not the case, however, the amount of shares and the total volume (quantity times price) of the offers can make the trade impossible. In fact, it is only possible to trade if both of them are different ($m \neq n$ and $ym \neq xn$), so that the one with less volume can be updated to a better price and lower quantity (with both equal, there's no room for change).
 
 To make this simulated market more liquid, the algorithm will not stop at the head of the queue if the volume and quantity conditions are not met. This is not an exception to the FIFO policy *per se*, it is more of a secondary step to match orders, in which total volume has an advantage.
 
 Important considerations:
 
-* The order to be changed (the one with higher volume) can be the already booked one. In this case, since its price will change, this order must be reallocated to a proper level. To respect the FIFO in the new price level, the order is inserted considering its timestamp relative to the other ones already in queue. Unfortunately, this insertion is *O(m)* (with *m* being the numbers of orders in the doubly-linked list).
+- The order to be changed (the one with higher volume) can be the already booked one. In this case, since its price will change, this order must be reallocated to a proper level. To respect the FIFO in the new price level, the order is inserted considering its timestamp relative to the other ones already in queue. Unfortunately, this insertion is $O(m)$ (with $m$ being the numbers of orders in the doubly-linked list).
 
-* The condition over the prices for an offer to be good is so that the order changed (whether it is a buy or sell) will always be closer to the best offer, which will **increase the chance of a match**.
-  * if the order changed is a buy, its price will increase, making it closer to being the best bid
-  * if the order changes is a sell, its price will decrease, making it closer to being the best ask
+- The condition over the prices for an offer to be good is so that the order changed (whether it is a buy or sell) will always be closer to the best offer, which will **increase the chance of a match**.
+  - if the order changed is a buy, its price will increase, making it closer to being the best bid
+  - if the order changes is a sell, its price will decrease, making it closer to being the best ask
 
 ---
 

@@ -1,8 +1,8 @@
 """Implements an order book of a simplified exchange as a wrapper for two book sides."""
 
-from quote import Order
-from level import Level
-from side import BookSide
+from .quote import Order
+from .level import Level
+from .side import BookSide
 
 
 class OrderBook:

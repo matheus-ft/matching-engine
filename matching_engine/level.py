@@ -1,6 +1,6 @@
 """Implements a price level class that is a (linked list) queue capsule and a BST node."""
 
-from quote import Order
+from .quote import Order
 
 
 class Level:

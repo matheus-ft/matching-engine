@@ -1,7 +1,7 @@
 """Implements one side of an order book as a binary search tree."""
 
-from quote import Order
-from level import Level
+from .quote import Order
+from .level import Level
 
 
 class BookSide:
