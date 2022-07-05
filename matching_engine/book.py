@@ -1,4 +1,5 @@
-"""Implements an order book of a simplified exchange as a wrapper for two book sides."""
+"""Implements an order book of a simplified exchange as a wrapper for two book
+sides."""
 
 from .quote import Order
 from .level import Level
@@ -92,9 +93,7 @@ class OrderBook:
                 order_side.register_order(order)
                 return
             order = self.trade_limit_order(order, counterparty_level)
-            counterparty_level = counterparty_side.next_level(
-                counterparty_level
-            )
+            counterparty_level = counterparty_side.next_level(counterparty_level)
 
     def process_market_order(self, order: Order) -> None:
         """Execute any available trades found.
@@ -112,9 +111,7 @@ class OrderBook:
         if counterparty_level is not None:
             while order.qty > 0:
                 order = self.trade_at_level(order, counterparty_level)
-                counterparty_level = counterparty_side.next_level(
-                    counterparty_level
-                )
+                counterparty_level = counterparty_side.next_level(counterparty_level)
                 if counterparty_level is None:
                     break
         else:
@@ -172,7 +169,8 @@ class OrderBook:
         return limit_order
 
     def trade_at_level(self, market_order: Order, level: Level) -> Order:
-        """Match as many booked orders in the level as possible with the given market order.
+        """Match as many booked orders in the level as possible with the given
+        market order.
 
         Args:
             market_order (Order): order searching for matches

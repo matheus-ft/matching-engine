@@ -1,4 +1,5 @@
-"""Implements a helper quote class to send orders as doubly-linked list nodes to the exchange."""
+"""Implements a helper quote class to send orders as doubly-linked list nodes
+to the exchange."""
 
 from datetime import datetime
 

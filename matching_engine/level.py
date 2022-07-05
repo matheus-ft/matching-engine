@@ -1,11 +1,11 @@
-"""Implements a price level class that is a (linked list) queue capsule and a BST node."""
+"""Implements a price level class that is a (linked list) queue capsule and a
+BST node."""
 
 from .quote import Order
 
 
 class Level:
-    """
-    Class to represent a price level in the OrderBook.
+    """Class to represent a price level in the OrderBook.
 
     Attributes
     ----------
@@ -92,7 +92,8 @@ class Level:
         return order
 
     def insert_order(self, limit_order: Order) -> None:
-        """Insert a limit order considering its timestamp relative to the ones already in queue.
+        """Insert a limit order considering its timestamp relative to the ones
+        already in queue.
 
         Args:
             limit_order (Order): limit order to be added
@@ -112,7 +113,8 @@ class Level:
         limit_order.prev = aux
 
     def remove_order(self, limit_order: Order) -> None:
-        """Remove a specific limit order inside the queue identifying it by its timestamp.
+        """Remove a specific limit order inside the queue identifying it by its
+        timestamp.
 
         Args:
             limit_order (Order): limit order to be removed

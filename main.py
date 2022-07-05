@@ -15,4 +15,3 @@ def start_trading() -> None:
 
 if __name__ == "__main__":
     start_trading()
-

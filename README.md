@@ -78,6 +78,13 @@ Since this exercise had to be done in just under a week, I prioritized developme
 
 ### Notes
 
-Anything commited after 2021/11/03 is not part of the exercise, it is just me tweaking things around because I think
+- Anything commited after 2021/11/03 is not part of the exercise, it is just me tweaking things around because I think
 this project is kinda cool.
+
+- To make sure the code is complient to PEP8 and PEP257, I added Black and Docformatter, which are run with
+
+```shell
+docformatter -ir .
+black .
+```
 

@@ -164,7 +164,8 @@ class BookSide:
                 new.parent = old.parent
 
     def remove_level(self, level: Level) -> None:
-        """Delete a given level of the BookSide by replacing it with its successor.
+        """Delete a given level of the BookSide by replacing it with its
+        successor.
 
         Args:
             level (Level): price level to be removed
